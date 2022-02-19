@@ -1,0 +1,49 @@
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = false
+	safecrlf = true
+	whitespace = trailing-space,space-before-tab
+[sendemail]
+	confirm = always
+[color]
+	ui = auto
+[color "status"]
+	branch = yellow
+
+[push]
+	default = simple
+[protocol]
+	version = 2
+[rerere]
+	enabled = true
+[pull]
+	rebase = true
+	twohead = ort
+[init]
+	defaultBranch = main
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[diff]
+	tool = meld
+	colorMoved = default
+	wsErrorHighlight = all
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+
+[merge]
+	tool = smerge
+	conflictStyle = zdiff3
+[mergetool]
+	keepBackup = false
+[mergetool "meld"]
+	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[mergetool "smerge"]
+	cmd = smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+	trustExitCode = true

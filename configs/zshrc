@@ -1,0 +1,358 @@
+# ----- POWERLEVEL10K (INSTANT PROMPT) -----
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
+# ----- OH MY ZSH -----
+
+# If you come from bash you might have to change your $PATH.
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+# Path to your oh-my-zsh installation.
+export ZSH="${HOME}/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+zstyle ':omz:update' frequency 7
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+HIST_STAMPS="%Y-%m-%d %H:%M:%S"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(encode64 poetry)
+
+source "${ZSH}/oh-my-zsh.sh"
+
+
+# ----- BACKPORTS FROM GRML
+
+GRML_OSTYPE=$(uname -s)
+
+islinux () {
+  [ "${GRML_OSTYPE}" = "Linux" ]
+}
+
+isdarwin () {
+  [ "${GRML_OSTYPE}" = "Darwin" ]
+}
+
+check_com () {
+  command -v "$1" >/dev/null 2>&1
+}
+
+
+# ----- CUSTOM CONFIGURATION
+
+# Environment variables
+export EDITOR=nano
+
+if isdarwin; then
+  MAIL="/Users/${USER}/Public/Drop Box"
+
+  if [ -d "/usr/local/opt/openssl@1.1/bin" ]; then
+    PATH="/usr/local/opt/openssl@1.1/bin:${PATH}"
+  fi
+fi
+
+# Convert numbers between bases
+function dec() { python3 -c "print(int('${1}', 16))"; }
+function hex() { python3 -c "print(hex(${1})[2:])"; }
+function bin() { python3 -c "print(bin(int('${1}', 16))[2:])"; }
+
+# Hex strings to raw bytes
+function hexd() { echo -n "${1}v" | perl -pe 's/([0-9a-f]{2})/chr hex $1/gie'; }
+
+# SSH
+case "${TERM}" in
+  tmux)
+    alias ssh='TERM=screen ssh'
+    ;;
+  tmux-256color)
+    alias ssh='TERM=screen-256color ssh'
+    ;;
+esac
+
+alias scp='scp -p'
+alias nssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PubkeyAuthentication=no'
+alias nscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PubkeyAuthentication=no'
+
+# Pager defaults
+alias less='less -F -R'
+export PAGER="less"
+
+# Bat
+if check_com batcat; then
+  alias bat="batcat"
+fi
+
+alias batless='bat --paging=always --style=full'
+
+# Test TLS connectivity
+function tls() { openssl s_client -showcerts -servername "${1}" -connect "${1}:${2:-443}" </dev/null; }
+
+# Diff: unified
+alias diff='diff -u'
+
+# Some more colours
+if islinux; then
+  alias diff='diff -u --color=auto'
+  alias ip='ip --color=auto'
+fi
+
+# Create a temporary directory for experiments
+function mkex() {
+  local dir prefix
+  if [ ! -d ~/Experiments ]; then mkdir -p ~/Experiments; fi
+  if [ -n "${1:-}" ]; then prefix="${1}-"; fi
+  dir=$(mktemp -d -p ~/Experiments "${prefix:-}XXXXXX")
+  cd "${dir}"
+}
+
+# We don't need no steam locomotive
+alias sl=ls
+
+# Disable name resolution for ping
+alias ping='ping -n'
+alias ping6='ping6 -n'
+
+# Git aliases
+alias g='git'
+alias ga='git add'
+alias gam='git am'
+alias gap='git apply'
+alias gb='git branch'
+alias gbv='git branch -v'
+alias gc='git commit -S -v'
+alias gca='git commit -S -v --amend'
+alias gcl='git clean'
+alias gclx='git clean -Xdf'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gcu='git commit -v'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdd='git difftool --dir-diff --no-symlinks'
+alias gdt='git difftool'
+alias gf='git fetch'
+alias gfp='git format-patch'
+alias gl='git log --format=fuller'
+alias gls='git log --graph --pretty=tformat:"%C(auto)%h %ai %Cgreen%al%C(auto) %s%d"'
+alias gm='git merge'
+alias gmt='git mergetool'
+alias gp='git pull'
+alias gpp='git pull --prune --tags'
+alias gr='git rebase'
+alias gre='git reset'
+alias grs='git restore'
+alias grv='git revert -S'
+alias gs='git status'
+alias gsh='git show --format=fuller'
+alias gsm='git send-email'
+alias gst='git stash'
+alias gsw='git switch'
+alias gt='git tag'
+alias gtd='git tag -d'
+alias gwt='git worktree'
+
+# Git push wrapper with support for GitLab push options
+gpu() {
+  local cmdline
+
+  cmdline="git push"
+
+  while [ -n "${1:-}" ]; do
+    case "${1}" in
+      --ci-skip)
+        cmdline="${cmdline} -o ci.skip" ;;
+      --ci-var | --ci-variable)
+        cmdline="${cmdline} -o ci.variable=\"${1}\"" ;;
+      --mr | --mr-create | --mr-new)
+        cmdline="${cmdline} -o merge_request.create" ;;
+      --mr-target | --mr-branch)
+        shift; cmdline="${cmdline} -o merge_request.target=\"${1}\"" ;;
+      --mr-mwps)
+        cmdline="${cmdline} -o merge_request.merge_when_pipeline_succeeds" ;;
+      --mr-remove | --mr-delete)
+        cmdline="${cmdline} -o merge_request.remove_source_branch" ;;
+      --mr-title | --mr-name )
+        shift; cmdline="${cmdline} -o merge_request.title=\"${1}\"" ;;
+      --mr-desc | --mr-description )
+        shift; cmdline="${cmdline} -o merge_request.description=\"${1}\"" ;;
+      --mr-label)
+        shift; cmdline="${cmdline} -o merge_request.label=\"${1}\"" ;;
+      --mr-unlabel)
+        shift; cmdline="${cmdline} -o merge_request.unlabel=\"${1}\"" ;;
+      --mr-assign)
+        shift; cmdline="${cmdline} -o merge_request.assign=\"${1}\"" ;;
+      --mr-unassign)
+        shift; cmdline="${cmdline} -o merge_request.unassign=\"${1}\"" ;;
+      *)
+        cmdline="${cmdline} ${1}" ;;
+    esac
+    shift
+  done
+
+  echo "${cmdline}"
+  eval "${cmdline}"
+}
+compdef _git gpu=git-push
+
+# mkcd shorthand
+mkcd() {
+  mkdir "${1}" && cd "${1}"
+}
+mkpcd() {
+  mkdir -p "${1}" && cd "${1}"
+}
+
+# Docker
+alias d='sudo docker'
+alias drun='sudo docker run --rm -ti'
+alias dco='sudo docker-compose'
+
+# Dig shorthands
+alias digs='dig +short'
+
+# Password generation
+alias genpw='pwgen -Bcvs 24 1'
+
+# Python
+alias pt='ptpython'
+
+# PyCharm
+alias pyc='pycharm-community'
+
+# Binwalk squashfs extraction
+alias esq='binwalk --include squashfs -e'
+
+# Tmux
+ta() {
+  tmux new-session -A -D -s "${1:-main}"
+}
+
+# MD5 alias (usually for macOS)
+if ! check_com md5sum && check_com md5; then
+  alias md5sum='md5'
+fi
+
+# SHAxxx aliases (usually for macOS)
+if check_com shasum; then
+  check_com sha1sum || alias sha1sum='shasum'
+  check_com sha224sum || alias sha224sum='shasum -a224'
+  check_com sha256sum || alias sha256sum='shasum -a256'
+  check_com sha384sum || alias sha256sum='shasum -a384'
+  check_com sha512sum || alias sha256sum='shasum -a512'
+fi
+
+# Apt
+if check_com apt; then
+  alias aup='apt update'
+  alias adu='apt dist-upgrade'
+  alias aar='apt autoremove --purge'
+  alias aac='apt autoclean'
+fi
+
+# Homebrew
+if check_com brew; then
+  alias bup='brew update'
+  alias bug='brew upgrade'
+  alias bcl='brew cleanup'
+fi
+
+# iTerm2 integration
+if isdarwin && [ -r ~/.iterm2.sh ]; then
+  source ~/.iterm2.sh
+fi
+
+# Pyenv
+if check_com pyenv; then
+  eval "$(pyenv init -)"
+fi
+
+# Rbenv
+if [ -d "${HOME}/.rbenv" ]; then
+  eval "$("${HOME}"/.rbenv/bin/rbenv init - zsh)"
+fi
+
+# 1Password
+if check_com op; then
+  eval "$(op completion zsh)"; compdef _op op
+fi
+
+
+# ----- POST-INITIALISATION
+
+# Machine-specific customisations
+if [ -r ~/.zshrc.machine-specific ]; then
+  source ~/.zshrc.machine-specific
+fi
+
+# Powerlevel10k
+if [ -r ~/.p10k.zsh ]; then
+  source ~/.p10k.zsh
+fi
+
+# zsh-syntax-highlighting
+if [ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
