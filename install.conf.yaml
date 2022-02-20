@@ -11,16 +11,17 @@
 - link:
     ~/.config/alacritty/alacritty.yml: configs/alacritty.yml
     ~/.config/bat/config: configs/bat
+    ~/.config/glow/glow.yml: configs/glow.yml
+    ~/.config/ptpython/config.py: configs/ptpython.py
+    ~/.config/pypoetry/config.toml: configs/pypoetry.toml
     ~/.gitconfig: configs/git/gitconfig
     ~/.gitignore: configs/git/gitignore
-    ~/.config/glow/glow.yml: configs/glow.yml
     ~/.gnupg/gpg.conf: configs/gnupg/gpg.conf
     ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
     ~/.gnupg/scdaemon.conf: configs/gnupg/scdaemon.conf
     ~/.nanorc: configs/nanorc
     ~/.p10k.zsh: configs/p10k.zsh
-    ~/.config/ptpython/config.py: configs/ptpython.py
-    ~/.config/pypoetry/config.toml: configs/pypoetry.toml
+    ~/.profile: configs/zprofile
     ~/.tmux.conf: configs/tmux.conf
     ~/.zprofile: configs/zprofile
     ~/.zshrc: configs/zshrc
