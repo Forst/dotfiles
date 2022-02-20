@@ -2,11 +2,63 @@
     link:
       create: true
       relink: true
+    shell:
+      quiet: true
+      stdout: true
+      stderr: true
 
 - clean:
     ~/: {}
     ~/.config:
       recursive: true
+
+- shell:
+  - description: 'Install Oh My Zsh'
+    command: |
+      if [ ! -e ~/.oh-my-zsh ]; then
+        git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+      fi
+
+      if [ ! -e ~/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+        mkdir -p ~/.oh-my-zsh/custom/themes
+        git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+      fi
+
+      if [ ! -e ~/.oh-my-zsh/custom/plugins/encode64 ]; then
+        mkdir -p ~/.oh-my-zsh/custom/plugins
+        cp -a zsh-plugins/encode64 ~/.oh-my-zsh/custom/plugins/
+      fi
+
+  - description: 'Install pyenv'
+    command: |
+      if [ ! -e ~/.pyenv ]; then
+        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+        (
+          cd ~/.pyenv
+          src/configure
+          make -C src
+        )
+      fi
+  - description: 'Install rbenv'
+    command: |
+      if [ ! -e ~/.rbenv ]; then
+        git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+        (
+          cd ~/.rbenv
+          src/configure
+          make -C src
+        )
+        rbenv_root="$(~/.rbenv/bin/rbenv root)"
+        mkdir -p "${rbenv_root}"/plugins
+        git clone https://github.com/rbenv/ruby-build.git "${rbenv_root}"/plugins/ruby-build
+      fi
+
+  - description: 'Install Tmux Plugin Manager'
+    command: |
+      if [ ! -e ~/.tmux/plugins/tpm ]; then
+        mkdir -p ~/.tmux/plugins
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+      fi
 
 - link:
     ~/.config/alacritty/alacritty.yml: configs/alacritty.yml
