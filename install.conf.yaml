@@ -3,6 +3,11 @@
       create: true
       relink: true
 
+- clean:
+    ~/: {}
+    ~/.config:
+      recursive: true
+
 - link:
     ~/.config/alacritty/alacritty.yml: configs/alacritty.yml
     ~/.config/bat/config: configs/bat
