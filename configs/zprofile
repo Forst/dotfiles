@@ -28,5 +28,6 @@ if [ "${PATHS:-}" != "set" ]; then
   # Rbenv
   if [ -e "${HOME}/.rbenv" ]; then
     export PATH="${HOME}/.rbenv/bin:${PATH}"
+    eval "$(rbenv init - | grep 'PATH=')"
   fi
 fi

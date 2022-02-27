@@ -331,7 +331,7 @@ fi
 
 # Rbenv
 if check_com rbenv; then
-  eval "$(rbenv init - zsh)"
+  eval "$(rbenv init - | grep -v 'PATH=')"
 fi
 
 # 1Password
