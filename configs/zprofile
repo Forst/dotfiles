@@ -12,11 +12,13 @@ if [ "${PATHS:-}" != "set" ]; then
   fi
 
   # Homebrew
-  if [ -e /home/linuxbrew ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  elif [ -e "${HOME}/.linuxbrew" ]; then
-    eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"
-  fi
+  for hb_path in "/usr/local" "/opt/homebrew" "/home/linuxbrew/.linuxbrew" "${HOME}/.linuxbrew"; do
+    hb_bin="${hb_path}/bin/brew"
+    if [ -e "${hb_bin}" ]; then
+      eval "$("${hb_bin}" shellenv)"
+      break
+    fi
+  done
 
   # Pyenv
   if [ -e "${HOME}/.pyenv" ]; then
