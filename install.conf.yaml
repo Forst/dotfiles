@@ -16,18 +16,25 @@
 - shell:
   - description: 'Install Oh My Zsh'
     command: |
+      zsh_custom=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
       if [ ! -e ~/.oh-my-zsh ]; then
         git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
       fi
 
-      if [ ! -e ~/.oh-my-zsh/custom/themes/powerlevel10k ]; then
-        mkdir -p ~/.oh-my-zsh/custom/themes
-        git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+      mkdir -p ${zsh_custom}/plugins
+      mkdir -p ${zsh_custom}/themes
+
+      if [ ! -e ${zsh_custom}/themes/powerlevel10k ]; then
+        git clone https://github.com/romkatv/powerlevel10k.git ${zsh_custom}/themes/powerlevel10k
       fi
 
-      if [ ! -e ~/.oh-my-zsh/custom/plugins/encode64 ]; then
-        mkdir -p ~/.oh-my-zsh/custom/plugins
-        cp -a zsh-plugins/encode64 ~/.oh-my-zsh/custom/plugins/
+      if [ ! -e ${zsh_custom}/plugins/encode64 ]; then
+        cp -a zsh-plugins/encode64 ${zsh_custom}/plugins/
+      fi
+
+      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${zsh_custom}/plugins/zsh-syntax-highlighting
       fi
 
   - description: 'Install pyenv'
