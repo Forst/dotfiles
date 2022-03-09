@@ -54,6 +54,12 @@
         git clone https://github.com/rbenv/ruby-build.git "${rbenv_root}"/plugins/ruby-build
       fi
 
+  - description: 'Install nvm'
+    command: |
+      if [ ! -e ~/.nvm ]; then
+        git clone https://github.com/nvm-sh/nvm.git ~/.nvm
+      fi
+
   - description: 'Install Tmux Plugin Manager'
     command: |
       if [ ! -e ~/.tmux/plugins/tpm ]; then

@@ -334,6 +334,12 @@ if check_com rbenv; then
   eval "$(rbenv init - | grep -v 'PATH=')"
 fi
 
+# nvm
+if [ -d "${HOME}/.nvm" ]; then
+  . "${HOME}/.nvm/nvm.sh"
+  . "${HOME}/.nvm/bash_completion"
+fi
+
 # 1Password
 if check_com op; then
   eval "$(op completion zsh)"; compdef _op op
