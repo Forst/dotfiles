@@ -67,6 +67,12 @@
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
       fi
 
+  - description: 'Get iTerm2 integration script (macOS)'
+    command: |
+      if [ "$(uname)" = 'Darwin' ] && [ ! -e ~/.iterm2.sh ]; then
+        curl -o ~/.iterm2.sh -SL "https://iterm2.com/shell_integration/zsh"
+      fi
+
 - link:
     ~/.config/alacritty/alacritty.yml: configs/alacritty.yml
     ~/.config/bat/config: configs/bat
