@@ -231,14 +231,17 @@ gpu() {
 
   while [ -n "${1:-}" ]; do
     case "${1}" in
-      --ci-skip)
+      --ci-skip | --skip-ci)
         cmdline="${cmdline} -o ci.skip" ;;
       --ci-var | --ci-variable)
         cmdline="${cmdline} -o ci.variable=\"${1}\"" ;;
       --mr | --mr-create | --mr-new)
         cmdline="${cmdline} -o merge_request.create" ;;
       --mr-target | --mr-branch)
-        shift; cmdline="${cmdline} -o merge_request.target=\"${1}\"" ;;
+        shift
+        mr_target="${1}"
+        cmdline="${cmdline} -o merge_request.target=\"${mr_target}\""
+        ;;
       --mr-mwps)
         cmdline="${cmdline} -o merge_request.merge_when_pipeline_succeeds" ;;
       --mr-remove | --mr-delete)
@@ -247,6 +250,17 @@ gpu() {
         shift; cmdline="${cmdline} -o merge_request.title=\"${1}\"" ;;
       --mr-desc | --mr-description )
         shift; cmdline="${cmdline} -o merge_request.description=\"${1}\"" ;;
+      --mr-desc-auto | --mr-description-auto )
+        if [ -z "${mr_target:-}" ]; then
+          if git describe main >/dev/null; then
+            mr_target="main"
+          else
+            mr_target="master"
+          fi
+        fi
+        description="$(gl --reverse --pretty=tformat:"* %s" "${mr_target}"..)"
+        cmdline="${cmdline} -o merge_request.description=\"${description}\""
+        ;;
       --mr-label)
         shift; cmdline="${cmdline} -o merge_request.label=\"${1}\"" ;;
       --mr-unlabel)
