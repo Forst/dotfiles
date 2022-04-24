@@ -133,6 +133,9 @@ function hexd() { echo -n "${1}v" | perl -pe 's/([0-9a-f]{2})/chr hex $1/gie'; }
 
 # SSH
 case "${TERM}" in
+  alacritty)
+    alias ssh='TERM=xterm-256color ssh'
+    ;;
   tmux)
     alias ssh='TERM=screen ssh'
     ;;
