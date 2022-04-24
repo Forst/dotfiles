@@ -29,7 +29,7 @@ check_com () {
 function prompt_my_nmcli_vpn() {
   if ! islinux; then return; fi
   local vpn
-  vpn="$(nmcli con show --active | grep vpn | head -n1 | sed 's/  /\t/g' | cut -d$'\t' -f1)"
+  vpn="$(nmcli con show --active 2>/dev/null | grep vpn | head -n1 | sed 's/  /\t/g' | cut -d$'\t' -f1)"
   if [ -z "${vpn}" ]; then return; fi
   p10k segment -t "${vpn}" -r -i 'LOCK_ICON' -f cyan
 }
