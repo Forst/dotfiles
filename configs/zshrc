@@ -284,6 +284,13 @@ gpu() {
 }
 compdef _git gpu=git-push
 
+# Change working directory to root of git repository
+# Won't work when under ".git", but I don't need it anyway
+gcd() {
+	local toplevel
+	toplevel="$(git rev-parse --show-toplevel)" && cd "${toplevel}"
+}
+
 # mkcd shorthand
 mkcd() {
   mkdir "${1}" && cd "${1}"
