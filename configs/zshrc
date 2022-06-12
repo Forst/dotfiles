@@ -149,8 +149,8 @@ alias nssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o P
 alias nscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PubkeyAuthentication=no'
 
 # Pager defaults
-alias less='less -F -R'
 export PAGER="less"
+export LESS="-F -R"
 
 # Bat
 if check_com batcat; then
