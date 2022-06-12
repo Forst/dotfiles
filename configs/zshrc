@@ -331,8 +331,8 @@ if check_com shasum; then
   check_com sha1sum || alias sha1sum='shasum'
   check_com sha224sum || alias sha224sum='shasum -a224'
   check_com sha256sum || alias sha256sum='shasum -a256'
-  check_com sha384sum || alias sha256sum='shasum -a384'
-  check_com sha512sum || alias sha256sum='shasum -a512'
+  check_com sha384sum || alias sha384sum='shasum -a384'
+  check_com sha512sum || alias sha512sum='shasum -a512'
 fi
 
 # Apt
