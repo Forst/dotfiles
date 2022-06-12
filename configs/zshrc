@@ -129,7 +129,7 @@ function hex() { python3 -c "print(hex(${1})[2:])"; }
 function bin() { python3 -c "print(bin(int('${1}', 16))[2:])"; }
 
 # Hex strings to raw bytes
-function hexd() { echo -n "${1}v" | perl -pe 's/([0-9a-f]{2})/chr hex $1/gie'; }
+function hexd() { echo "${1}" | perl -pe 's/([0-9a-f]{2})/chr hex $1/gie'; }
 
 # SSH
 case "${TERM}" in
