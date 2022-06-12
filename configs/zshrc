@@ -173,11 +173,8 @@ fi
 
 # Create a temporary directory for experiments
 function mkex() {
-  local dir prefix
-  if [ ! -d ~/Experiments ]; then mkdir -p ~/Experiments; fi
-  if [ -n "${1:-}" ]; then prefix="${1}-"; fi
-  dir=$(mktemp -d -p ~/Experiments "${prefix:-}XXXXXX")
-  cd "${dir}"
+  [ -d ~/Experiments ] || mkdir -p ~/Experiments
+  cd "$(mktemp -d ~/Experiments/"${1:+${1}-}XXXXXX")"
 }
 
 # We don't need no steam locomotive
