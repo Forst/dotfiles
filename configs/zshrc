@@ -372,10 +372,15 @@ if check_com rbenv; then
 fi
 
 # nvm
-#if [ -d "${HOME}/.nvm" ]; then
-#  . "${HOME}/.nvm/nvm.sh"
-#  . "${HOME}/.nvm/bash_completion"
-#fi
+load_nvm() {
+  if [ -d "${HOME}/.nvm" ]; then
+    . "${HOME}/.nvm/nvm.sh"
+    . "${HOME}/.nvm/bash_completion"
+
+    unset -f load_nvm
+  fi
+}
+
 
 # 1Password
 if check_com op; then
