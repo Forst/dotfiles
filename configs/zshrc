@@ -329,6 +329,11 @@ ta() {
   tmux new-session -A -D -s "${1:-main}"
 }
 
+# Alias "open" to "xdg-open"
+if ! check_com open && check_com xdg-open; then
+  alias open='xdg-open'
+fi
+
 # MD5 alias (usually for macOS)
 if ! check_com md5sum && check_com md5; then
   alias md5sum='md5'
