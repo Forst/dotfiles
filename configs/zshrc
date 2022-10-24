@@ -399,6 +399,7 @@ load_nvm() {
 # 1Password
 if check_com op; then
   eval "$(op completion zsh)"; compdef _op op
+  export OP_BIOMETRIC_UNLOCK_ENABLED=true
 fi
 
 
