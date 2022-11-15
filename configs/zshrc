@@ -319,7 +319,7 @@ mkpcd() {
 # Docker
 alias d='sudo docker'
 alias drun='sudo docker run --rm -ti'
-alias dco='sudo docker-compose'
+alias dco='sudo docker compose'
 
 # Dig shorthands
 alias digs='dig +short'
