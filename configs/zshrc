@@ -172,7 +172,7 @@ export PAGER="less"
 export LESS="-F -R"
 
 # Bat
-if check_com batcat; then
+if check_com batcat && ! check_com bat; then
   alias bat="batcat"
 fi
 
