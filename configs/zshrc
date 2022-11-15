@@ -36,6 +36,12 @@ function prompt_my_nmcli_vpn() {
 }
 
 
+# ----- HOMEBREW AUTOCOMPLETE -----
+if check_com brew; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+
 # ----- OH MY ZSH -----
 # If you come from bash you might have to change your $PATH.
 # export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
