@@ -125,9 +125,13 @@ export EDITOR=nano
 if isdarwin; then
   MAIL="/Users/${USER}/Public/Drop Box"
 
-  if [ -d "/usr/local/opt/openssl@1.1/bin" ]; then
-    PATH="/usr/local/opt/openssl@1.1/bin:${PATH}"
-  fi
+  # Keg-only formulae on macOS
+  keg_only=(openssl curl)
+  for formula in ${keg_only}; do
+    if formula_path="$(brew --prefix "${formula}")" && [ -d "${formula_path}/bin" ]; then
+      PATH="${formula_path}/bin:${PATH}"
+    fi
+  done
 fi
 
 # Convert numbers between bases
