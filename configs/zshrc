@@ -411,6 +411,10 @@ load_nvm() {
 if check_com op; then
   eval "$(op completion zsh)"; compdef _op op
   export OP_BIOMETRIC_UNLOCK_ENABLED=true
+
+  if [ -e "${HOME}/.config/op/plugins.sh" ]; then
+    source "${HOME}/.config/op/plugins.sh"
+  fi
 fi
 
 
