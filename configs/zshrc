@@ -120,6 +120,7 @@ source "${ZSH}/oh-my-zsh.sh"
 # ----- CUSTOM CONFIGURATION
 
 # Environment variables
+export VISUAL=nano
 export EDITOR=nano
 
 if isdarwin; then
@@ -405,7 +406,6 @@ load_nvm() {
     unset -f load_nvm
   fi
 }
-
 
 # 1Password
 if check_com op; then
