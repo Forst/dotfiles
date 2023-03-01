@@ -113,6 +113,9 @@ HIST_STAMPS="%Y-%m-%d %H:%M:%S"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(encode64 zsh-syntax-highlighting)
+if check_com poetry; then
+  plugins+=(poetry)
+fi
 
 source "${ZSH}/oh-my-zsh.sh"
 
