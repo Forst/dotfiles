@@ -423,6 +423,14 @@ if check_com op; then
   fi
 fi
 
+# Shorthand for Python virtual environments
+venv() {
+  local venv_dir
+  venv_dir="${1:-venv}"
+  [ -d "${venv_dir}" ] || python3 -m venv "${venv_dir}"
+  source "${venv_dir}/bin/activate"
+  pip3 install -U pip setuptools wheel
+}
 
 # ----- POST-INITIALISATION
 
