@@ -274,7 +274,7 @@ gpu() {
   while [ -n "${1:-}" ]; do
     case "${1}" in
       --ci-skip | --skip-ci)
-        cmdline="${cmdline} -o ci.skip" ;;
+        cmdline="${cmdline} -o ci.skip -o integrations.skip_ci" ;;
       --ci-var | --ci-variable)
         cmdline="${cmdline} -o ci.variable=\"${1}\"" ;;
       --mr | --mr-create | --mr-new)
@@ -303,6 +303,10 @@ gpu() {
         description="$(gl --reverse --pretty=tformat:"* %s" "${mr_target}"..)"
         cmdline="${cmdline} -o merge_request.description=\"${description}\""
         ;;
+      --mr-draft)
+        cmdline="${cmdline} -o merge_request.draft" ;;
+      --mr-milestone)
+        shift; cmdline="${cmdline} -o merge_request.milestone=\"${1}\"" ;;
       --mr-label)
         shift; cmdline="${cmdline} -o merge_request.label=\"${1}\"" ;;
       --mr-unlabel)
