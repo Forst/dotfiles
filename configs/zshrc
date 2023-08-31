@@ -395,7 +395,7 @@ if check_com brew; then
 fi
 
 # iTerm2 integration
-if isdarwin && [ -r ~/.iterm2.sh ]; then
+if [ "${TERM_PROGRAM:-}" = 'iTerm.app' ] && [ -r ~/.iterm2.sh ]; then
   source ~/.iterm2.sh
 fi
 
