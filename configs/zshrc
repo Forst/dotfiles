@@ -316,14 +316,6 @@ gcd() {
 	toplevel="$(git rev-parse --show-toplevel)" && cd "${toplevel}"
 }
 
-# mkcd shorthand
-mkcd() {
-  mkdir "${1}" && cd "${1}"
-}
-mkpcd() {
-  mkdir -p "${1}" && cd "${1}"
-}
-
 # Docker
 alias d='sudo docker'
 alias drun='sudo docker run --rm -ti'
