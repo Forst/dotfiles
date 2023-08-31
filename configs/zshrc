@@ -412,8 +412,8 @@ fi
 # nvm
 load_nvm() {
   if [ -d "${HOME}/.nvm" ]; then
-    . "${HOME}/.nvm/nvm.sh"
-    . "${HOME}/.nvm/bash_completion"
+    source "${HOME}/.nvm/nvm.sh"
+    source "${HOME}/.nvm/bash_completion"
 
     unset -f load_nvm
   fi
