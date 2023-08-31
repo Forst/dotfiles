@@ -180,11 +180,24 @@ export PAGER="less"
 export LESS="-F -R"
 
 # Bat
-if check_com batcat && ! check_com bat; then
-  alias bat="batcat"
+if check_com batcat; then
+  bat_="batcat"
+  if ! check_com bat; then
+    alias bat="batcat"
+  fi
+elif check_com bat; then
+  bat_="bat"
 fi
 
-alias batless='bat --paging=always --style=full'
+if [ -n "${bat_:-}" ]; then
+  export PAGER="${bat_} --paging=always --style=numbers"
+  export BAT_PAGER='less'
+  export MANPAGER="sh -c 'col -bx | ${bat_} --paging=always --language man --plain'"
+
+  alias bathelp="${bat_} --plain --language help"
+  alias cat="${bat_}"
+  alias less="${bat_} --paging=always --style=full"
+fi
 
 # Test TLS connectivity
 function tls() { openssl s_client -showcerts -servername "${1}" -connect "${1}:${2:-443}" </dev/null; }
