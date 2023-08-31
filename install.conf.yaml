@@ -81,7 +81,7 @@
       fi
 
 - link:
-    ~/.config/alacritty/alacritty.yml: configs/alacritty.yml
+    ~/.config/alacritty/alacritty.toml: configs/alacritty.toml
     ~/.config/bat/config: configs/bat
     ~/.config/glow/glow.yml: configs/glow.yml
     ~/.config/ptpython/config.py: configs/ptpython.py
