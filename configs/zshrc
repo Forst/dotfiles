@@ -200,7 +200,7 @@ if [ -n "${bat_:-}" ]; then
 fi
 
 # Test TLS connectivity
-function tls() { openssl s_client -showcerts -servername "${1}" -connect "${1}:${2:-443}" </dev/null; }
+function tls() { openssl s_client -showcerts -status -servername "${1}" -connect "${1}:${2:-443}" </dev/null; }
 
 # Diff: unified
 alias diff='diff -u'
