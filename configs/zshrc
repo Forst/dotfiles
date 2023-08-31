@@ -334,9 +334,14 @@ gcd() {
 }
 
 # Docker
-alias d='sudo docker'
-alias drun='sudo docker run --rm -ti'
-alias dco='sudo docker compose'
+if check_com docker; then
+  if [ -e /var/run/docker.sock ] && [ ! -w /var/run/docker.sock ]; then
+    docker_needs_sudo=1
+  fi
+  alias d="${docker_needs_sudo:+sudo }docker"
+  alias drun="${docker_needs_sudo:+sudo }docker run --rm -ti"
+  alias dco="${docker_needs_sudo:+sudo }docker compose"
+fi
 
 # Dig shorthands
 alias digs='dig +short'
