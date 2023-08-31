@@ -431,11 +431,28 @@ fi
 
 # Shorthand for Python virtual environments
 venv() {
-  local venv_dir venv_existed
-  venv_dir="${1:-venv}"
-  venv_existed=1
-  [ -d "${venv_dir}" ] || venv_existed=0
-  [ "${venv_existed}" = "1" ] || python3 -m venv "${venv_dir}"
+  local venv_check_dirs venv_dir venv_existed
+
+  if [ -n "${1:-}" ]; then
+    venv_check_dirs=("${1}")
+    venv_dir="${1}"
+  else
+    venv_check_dirs=('venv' '.venv')
+    venv_dir='venv'
+  fi
+
+  venv_existed=0
+  for venv_check_dir in "${venv_check_dirs[@]}"; do
+    if [ -d "${venv_check_dir}" ]; then
+      venv_existed=1
+      venv_dir="${venv_check_dir}"
+
+      echo "Will activate existing venv under '${venv_dir}'"
+      break
+    fi
+  done
+
+  [ "${venv_existed}" = "1" ] || { echo "Creating new venv under '${venv_dir}'"; python3 -m venv "${venv_dir}"; }
   source "${venv_dir}/bin/activate"
   [ "${venv_existed}" = "1" ] || pip3 install -U pip setuptools wheel
 }
