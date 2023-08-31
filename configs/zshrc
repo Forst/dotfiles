@@ -355,9 +355,6 @@ alias pt='ptpython'
 # PyCharm
 alias pyc='pycharm-community'
 
-# Binwalk squashfs extraction
-alias esq='binwalk --include squashfs -e'
-
 # Tmux
 ta() {
   tmux new-session -A -D -s "${1:-main}"
