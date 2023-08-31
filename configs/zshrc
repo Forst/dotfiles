@@ -402,12 +402,6 @@ fi
 # Pyenv
 if check_com pyenv; then
   eval "$(pyenv init -)"
-
-  # Custom install command to fix _ctypes/libffi
-  # src: https://dev.to/ajkerrigan/homebrew-pyenv-ctypes-oh-my-3d9
-  pyenv_install() {
-    CC="$(brew --prefix gcc)/bin/gcc-11" pyenv install "$@"
-  }
 fi
 
 # Rbenv
