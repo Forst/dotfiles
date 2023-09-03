@@ -206,8 +206,11 @@ function tls() { openssl s_client -showcerts -status -servername "${1}" -connect
 alias diff='diff -u'
 
 # Some more colours
-if islinux; then
+if diff --version | grep -Fq 'GNU diffutils'; then
   alias diff='diff -u --color=auto'
+fi
+
+if check_com ip; then
   alias ip='ip --color=auto'
 fi
 
