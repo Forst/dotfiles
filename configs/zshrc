@@ -202,6 +202,7 @@ if [ -n "${bat_:-}" ]; then
   export PAGER="${bat_} --paging=always --style=numbers"
   export BAT_PAGER='less'
   export MANPAGER="sh -c 'col -bx | ${bat_} --paging=always --language man --plain'"
+  export MANROFFOPT='-c'
 
   alias bathelp="${bat_} --plain --language help"
   alias cat="${bat_}"
