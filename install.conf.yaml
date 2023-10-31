@@ -83,6 +83,7 @@
 - link:
     ~/.config/alacritty/alacritty.toml: configs/alacritty.toml
     ~/.config/bat/config: configs/bat
+    ~/.config/glab-cli/config.yml: configs/glab-cli/config.yml
     ~/.config/glow/glow.yml: configs/glow.yml
     ~/.config/ptpython/config.py: configs/ptpython.py
     ~/.config/pypoetry/config.toml: configs/pypoetry.toml
