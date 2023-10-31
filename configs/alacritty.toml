@@ -58,6 +58,11 @@ chars = "\u0002k"
 key = "K"
 mods = "Shift|Control"
 
+[[keyboard.bindings]]
+action = "ClearHistory"
+key = "K"
+mods = "Shift|Control|Alt"
+
 [window.dimensions]
 columns = 140
 lines = 35
