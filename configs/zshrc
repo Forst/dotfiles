@@ -159,10 +159,13 @@ ssh_auth_sock="${HOME}/.1password/agent.sock"
 if [ -S "${ssh_auth_sock}" ]; then
   export SSH_AUTH_SOCK="${ssh_auth_sock}"
 elif [ -z "${SSH_AUTH_SOCK:-}" ]; then
-  ssh_auth_sock="/run/user/${UID:-$(id -u)}/keyring/ssh"
-  if [ -S "${ssh_auth_sock}" ]; then
-    export SSH_AUTH_SOCK="${ssh_auth_sock}"
-  fi
+  ssh_auth_socks=("/run/user/${UID:-$(id -u)}/openssh_agent" "/run/user/${UID:-$(id -u)}/keyring/ssh")
+  for ssh_auth_sock in "${ssh_auth_socks[@]}"; do
+    if [ -S "${ssh_auth_sock}" ]; then
+      export SSH_AUTH_SOCK="${ssh_auth_sock}"
+      break
+    fi
+  done
 fi
 
 case "${TERM}" in
