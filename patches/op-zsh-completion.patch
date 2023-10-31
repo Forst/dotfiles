@@ -1,0 +1,73 @@
+src: https://gist.github.com/aaronkollasch/58e861cd5af1f420ca0270366e81bb5f
+
+--- _op
++++ _op
+@@ -2,6 +2,8 @@
+ 
+ 
+ function _op {
++  local curcontext="$curcontext" state state_descr line
++  typeset -A opt_args
+   local -a commands
+ 
+   _arguments -C \
+@@ -44,7 +46,7 @@
+     ;;
+   esac
+ 
+-  case "$words[1]" in
++  case "$line[1]" in
+   account)
+     _op_account
+     ;;
+@@ -1348,6 +1350,8 @@
+ 
+ 
+ function _op_plugin {
++  local curcontext="$curcontext" state state_descr line
++  typeset -A opt_args
+   local -a commands
+ 
+   _arguments -C \
+@@ -1378,7 +1382,7 @@
+     ;;
+   esac
+ 
+-  case "$words[1]" in
++  case "$line[1]" in
+   clear)
+     _op_plugin_clear
+     ;;
+@@ -1506,8 +1510,12 @@
+     '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+ }
+ 
++typeset -g OP_PLUGIN_LIST=("${(f)$(op plugin list | tail '+2' | cut -d' ' -f1)}")
+ function _op_plugin_run {
+-  _arguments \
++  local curcontext="$curcontext" state state_descr line
++  typeset -A opt_args
++
++  _arguments -C -S \
+     '(-h --help)'{-h,--help}'[Get help with plugin run.]' \
+     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+     '--cache[Store and use cached information. Caching is enabled by default on UNIX-like systems. Caching is not available on Windows. Options: true, false. Can also be set with the OP_CACHE environment variable.]' \
+@@ -1517,7 +1525,17 @@
+     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+     '--no-color[Print output without color.]' \
+-    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
++    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:' \
++    ":plugin:->cmnds" \
++    "*::arg:->args"
++
++  case $state in
++  cmnds)
++    _describe "plugin" OP_PLUGIN_LIST
++    ;;
++  esac
++
++  _dispatch "$curcontext" "$line[1]"
+ }
+ 
+ function _op_read {

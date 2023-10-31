@@ -96,4 +96,5 @@
     ~/.profile: configs/zprofile
     ~/.tmux.conf: configs/tmux.conf
     ~/.zprofile: configs/zprofile
+    ~/.zshcomp: completions
     ~/.zshrc: configs/zshrc

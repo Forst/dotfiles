@@ -42,6 +42,12 @@ if check_com brew; then
 fi
 
 
+# ----- CUSTOM AUTOCOMPLETE -----
+if [ -d "${HOME}/.zshcomp" ]; then
+  FPATH="${HOME}/.zshcomp:${FPATH}"
+fi
+
+
 # ----- OH MY ZSH -----
 # If you come from bash you might have to change your $PATH.
 # export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
@@ -424,7 +430,6 @@ load_nvm() {
 
 # 1Password
 if check_com op; then
-  eval "$(op completion zsh)"; compdef _op op
   export OP_BIOMETRIC_UNLOCK_ENABLED=true
 
   if [ -e "${HOME}/.config/op/plugins.sh" ]; then
