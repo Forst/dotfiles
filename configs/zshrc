@@ -367,6 +367,7 @@ alias genpw='pwgen -Bcvs 24 1'
 
 # Python
 alias pt='ptpython'
+export PIP_REQUIRE_VIRTUALENV=true
 
 # PyCharm
 alias pyc='pycharm-community'
