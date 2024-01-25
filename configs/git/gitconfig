@@ -4,6 +4,11 @@
 	safecrlf = true
 	whitespace = trailing-space,space-before-tab
 	abbrev = 12
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = "/opt/1Password/op-ssh-sign"
+	allowedsignersfile = ~/.ssh/allowed_signers
 [sendemail]
 	confirm = always
 [color]
