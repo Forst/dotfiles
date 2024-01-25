@@ -470,7 +470,7 @@ venv() {
 
   [ "${venv_existed}" = "1" ] || { echo "Creating new venv under '${venv_dir}'"; python3 -m venv "${venv_dir}"; }
   source "${venv_dir}/bin/activate"
-  [ "${venv_existed}" = "1" ] || pip3 install -U pip setuptools wheel
+  [ "${venv_existed}" = "1" ] || pip3 install -U pip
 }
 
 # ----- POST-INITIALISATION
