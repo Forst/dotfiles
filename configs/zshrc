@@ -355,6 +355,7 @@ if check_com docker; then
     docker_needs_sudo=1
   fi
   alias d="${docker_needs_sudo:+sudo }docker"
+  alias dils="${docker_needs_sudo:+sudo }docker image ls --format 'table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.Size}}'"
   alias drun="${docker_needs_sudo:+sudo }docker run --rm -ti"
   alias dco="${docker_needs_sudo:+sudo }docker compose"
 fi
