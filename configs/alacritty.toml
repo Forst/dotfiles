@@ -37,6 +37,11 @@ size = 14.0
 
 [font.normal]
 family = "JetBrains Mono Nerd Font"
+style = "Light"
+
+[font.bold]
+family = "JetBrains Mono Nerd Font"
+style = "ExtraBold"
 
 [font.offset]
 x = 0
