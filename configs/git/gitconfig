@@ -16,8 +16,13 @@
 [color "status"]
 	branch = yellow
 
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
 [push]
 	default = simple
+	gpgSign = if-asked
 [protocol]
 	version = 2
 [rerere]
