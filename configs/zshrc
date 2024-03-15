@@ -342,6 +342,8 @@ gpu() {
 }
 compdef _git gpu=git-push
 
+alias gpuf='gpu --force-with-lease'
+
 # Change working directory to root of git repository
 # Won't work when under ".git", but I don't need it anyway
 gcd() {
