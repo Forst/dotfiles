@@ -91,6 +91,7 @@
     ~/.gitignore: configs/git/gitignore
     ~/.gnupg/gpg.conf: configs/gnupg/gpg.conf
     ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
+    ~/.gnupg/scdaemon.conf: configs/gnupg/scdaemon.conf
     ~/.nanorc: configs/nanorc
     ~/.p10k.zsh: configs/p10k.zsh
     ~/.profile: configs/zprofile
