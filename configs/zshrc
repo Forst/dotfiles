@@ -197,7 +197,7 @@ elif check_com bat; then
 fi
 
 if [ -n "${bat_:-}" ]; then
-  export PAGER="${bat_} --paging=always --style=numbers"
+  export PAGER="${bat_} --paging=always"
   export BAT_PAGER='less'
   export MANPAGER="sh -c 'col -bx | ${bat_} --paging=always --language man --plain'"
   export MANROFFOPT='-c'
