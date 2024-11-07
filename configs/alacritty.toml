@@ -1,4 +1,3 @@
-ipc_socket = false
 
 [bell]
 color = "#005FA5"
@@ -73,3 +72,6 @@ mods = "Shift|Control|Alt"
 [window.dimensions]
 columns = 140
 lines = 35
+
+[general]
+ipc_socket = false
