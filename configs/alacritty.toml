@@ -35,16 +35,16 @@ foreground = "#ffffff"
 size = 14.0
 
 [font.normal]
-family = "JetBrains Mono Nerd Font"
-style = "Light"
+family = "Berkeley Mono Nerd Font"
+style = "Regular"
 
 [font.bold]
-family = "JetBrains Mono Nerd Font"
-style = "ExtraBold"
+family = "Berkeley Mono Nerd Font"
+style = "Bold"
 
 [font.offset]
 x = 0
-y = -3
+y = 0
 
 [[keyboard.bindings]]
 action = "ToggleFullScreen"
