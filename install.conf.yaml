@@ -94,6 +94,7 @@
     ~/.gnupg/scdaemon.conf: configs/gnupg/scdaemon.conf
     ~/.nanorc: configs/nanorc
     ~/.p10k.zsh: configs/p10k.zsh
+    ~/.pam_environment: configs/pam_environment
     ~/.profile: configs/zprofile
     ~/.tmux.conf: configs/tmux.conf
     ~/.zprofile: configs/zprofile
