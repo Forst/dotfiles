@@ -177,6 +177,11 @@ alias nscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o P
 # gdb
 export DEBUGINFOD_URLS='https://debuginfod.ubuntu.com'
 
+# Web browser
+if check_com firefox; then
+  export BROWSER='firefox'
+fi
+
 # Pager defaults
 export PAGER="less"
 export LESS="-F -R"
