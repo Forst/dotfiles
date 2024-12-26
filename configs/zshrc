@@ -450,6 +450,14 @@ if check_com op; then
   fi
 fi
 
+# uv
+if check_com uv; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+if check_com uvx; then
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
+
 # Shorthand for Python virtual environments
 venv() {
   local venv_check_dirs venv_dir venv_existed
