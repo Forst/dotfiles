@@ -66,11 +66,11 @@ set constantshow
 ## Set the target width for automatic hard-wrapping and for justifying
 ## paragraphs.  If the specified value is 0 or less, the wrapping point
 ## will be the terminal's width minus this number.
-set fill 120
+set fill 80
 
 ## Draw a vertical stripe at the given column, to help judge text width.
 ## (This option does not have a default value.)
-set guidestripe 120
+set guidestripe 80
 
 ## Remember the used search/replace strings for the next session.
 # set historylog
