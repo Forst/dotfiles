@@ -35,7 +35,7 @@
         cp -a zsh-plugins/encode64 ${zsh_custom}/plugins/
       fi
 
-      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+      if [ ! -e ${zsh_custom}/plugins/zsh-syntax-highlighting ]; then
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${zsh_custom}/plugins/zsh-syntax-highlighting
       fi
 
