@@ -16,6 +16,9 @@
     ~/.config:
       recursive: true
 
+- create:
+  - ~/.ssh/config.d
+
 - shell:
   - description: 'Install Oh My Zsh'
     command: |
@@ -82,9 +85,6 @@
       if [ "$(uname)" = 'Darwin' ] && [ ! -e ~/.iterm2.sh ]; then
         curl -o ~/.iterm2.sh -SL "https://iterm2.com/shell_integration/zsh"
       fi
-
-- create:
-  - ~/.ssh/config.d
 
 - link:
     ~/.config/alacritty/alacritty.toml: configs/alacritty.toml
