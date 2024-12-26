@@ -50,6 +50,10 @@ set afterends
 ## Do case-sensitive searches by default.
 # set casesensitive
 
+## Interpret digits given on the command line after a colon after a filename
+## as the line number to go to in that file.
+# set colonparsing
+
 ## Constantly display the cursor position in the status bar or minibar.
 set constantshow
 
@@ -98,8 +102,8 @@ set locking
 # set minibar
 
 ## Enable mouse support, if available for your system.  When enabled,
-## mouse clicks can be used to place the cursor, set the mark (with a
-## double click), and execute shortcuts.  The mouse will work in the
+## mouse clicks can be used to place the cursor, set the mark (with
+## two clicks), and execute shortcuts.  The mouse will work in the
 ## X Window System, and on the console when gpm is running.
 set mouse
 
@@ -295,13 +299,16 @@ bind ^/ comment main
 # unbind M-T main
 ## (Those functions are still accessible through ^T^J and ^T^V.)
 
-## For quickly uppercasing or lowercasing the word under or after the cursor.
+## For quickly uppercasing or lowercasing the word that the cursor is on.
 ## (These effectively select a word and pipe it through a sed command.)
-#bind Sh-M-U "{nextword}{mark}{prevword}{execute}|sed 's/.*/\U&/'{enter}" main
-#bind Sh-M-L "{nextword}{mark}{prevword}{execute}|sed 's/.*/\L&/'{enter}" main
+# bind Sh-M-U "{nextword}{mark}{prevword}{execute}| sed 's/.*/\U&/' {enter}" main
+# bind Sh-M-L "{nextword}{mark}{prevword}{execute}| sed 's/.*/\L&/' {enter}" main
 
 ## For copying a marked region to the system clipboard:
-# bind Sh-M-T "{execute}|xsel -ib{enter}{undo}" main
+# bind Sh-M-C "{execute}| xsel -ib {enter}{undo}" main
+
+## For normalizing Unicode to precomposed characters:
+# bind Sh-M-N "{execute}| uconv -x nfc {enter}" main
 
 ## For snipping trailing blanks when you save a file:
 # bind ^S "{execute}| sed 's/\s\+$//' {enter}{savefile}" main
@@ -309,34 +316,34 @@ bind ^/ comment main
 ## If you would like nano to have keybindings that are more "usual",
 ## such as ^O for Open, ^F for Find, ^H for Help, and ^Q for Quit,
 ## then uncomment these:
-#bind ^X cut main
-#bind ^C copy main
-#bind ^V paste all
-#bind ^Q exit all
-#bind ^S savefile main
-#bind ^W writeout main
-#bind ^O insert main
-#set multibuffer
-#bind ^H help all
-#bind ^H exit help
-#bind ^F whereis all
-#bind ^G findnext all
-#bind ^B wherewas all
-#bind ^D findprevious all
-#bind ^R replace main
-#unbind ^U all
-#unbind ^N main
-#unbind ^Y all
-#unbind M-J main
-#unbind M-T main
-#bind ^A mark main
-#bind ^P location main
-#bind ^T gotoline main
-#bind ^T gotodir browser
-#bind ^T cutrestoffile execute
-#bind ^L linter execute
-#bind ^E execute main
-#bind ^K "{mark}{end}{zap}" main
-#bind ^U "{mark}{home}{zap}" main
-#bind ^Z undo main
-#bind ^Y redo main
+# bind ^X cut main
+# bind ^C copy main
+# bind ^V paste all
+# bind ^Q exit all
+# bind ^S savefile main
+# bind ^W writeout main
+# bind ^O insert main
+# set multibuffer
+# bind ^H help all
+# bind ^H exit help
+# bind ^F whereis all
+# bind ^G findnext all
+# bind ^B wherewas all
+# bind ^D findprevious all
+# bind ^R replace main
+# unbind ^U all
+# unbind ^N main
+# unbind ^Y all
+# unbind M-J main
+# unbind M-T main
+# bind ^A mark main
+# bind ^P location main
+# bind ^T gotoline main
+# bind ^T gotodir browser
+# bind ^T cutrestoffile execute
+# bind ^L linter execute
+# bind ^E execute main
+# bind ^K "{mark}{end}{zap}" main
+# bind ^U "{mark}{home}{zap}" main
+# bind ^Z undo main
+# bind ^Y redo main
