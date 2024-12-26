@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -eux -o pipefail
+
+check_com () {
+	command -v "$1" >/dev/null 2>&1
+}
+
+if [ -d ~/.oh-my-zsh ]; then
+	cd ~/.oh-my-zsh
+	git pull --prune
+	cd ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	git pull --prune
+	cd ~/.oh-my-zsh/custom/themes/powerlevel10k
+	git pull --prune
+fi
+
+if [ -d ~/.pyenv ]; then
+	cd ~/.pyenv
+	git pull --prune
+fi
+
+if [ -d ~/.rbenv ]; then
+	cd ~/.rbenv
+	git pull --prune
+	cd ~/.rbenv/plugins/ruby-build
+	git pull --prune
+fi
+
+if [ -d ~/.nvm ]; then
+	cd ~/.nvm
+	git pull --prune
+fi
+
+if check_com brew; then
+	brew update
+	brew upgrade
+	brew cleanup
+fi
+
+if check_com apt; then
+	sudo apt update
+	sudo apt dist-upgrade --autoremove
+	sudo apt autoremove
+	sudo apt autoclean
+fi
+
+if check_com snap; then
+	sudo snap refresh
+fi
+
+sudo -k

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sensors coretemp-isa-0000
+
+cpu_count="$(nproc --all)"
+
+for ((i=0;i<cpu_count;i++)); do
+	cpudir="/sys/devices/system/cpu/cpu${i}/cpufreq"
+	freq="$(cat ${cpudir}/scaling_cur_freq)"
+	printf "CPU%d\t%4d MHz\n" "${i}" "$(expr ${freq} / 1000)"
+done

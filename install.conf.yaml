@@ -106,3 +106,8 @@
     ~/.zprofile: configs/zprofile
     ~/.zshcomp: completions
     ~/.zshrc: configs/zshrc
+
+- link:
+    ~/bin/:
+      glob: true
+      path: bin/*

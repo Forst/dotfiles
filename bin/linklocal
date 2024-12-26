@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+from binascii import hexlify
+import ipaddress
+import re
+import sys
+
+
+XOR_MASK =    0xfe80_0000_0000_0000_0200_00ff_fe00_0000
+LL_OUI_MASK = 0x0000_0000_0000_0000_ffff_ff00_0000_0000
+LL_NIC_MASK = 0x0000_0000_0000_0000_0000_0000_00ff_ffff
+MAC_OUI_MASK = 0xffffff_000000
+MAC_NIC_MASK = LL_NIC_MASK
+OUI_SHIFT = 16
+
+MAC_REGEX = re.compile(r'^(?:[0-9a-f]{2}:){5}[0-9a-f]{2}$', flags=re.IGNORECASE)
+
+TEST_VECTOR = ('fe80::260:2fff:fe09:3012', '00:60:2f:09:30:12')
+
+
+def l2m(addr_str: str) -> str:
+    addr = ipaddress.ip_address(addr_str)  # type: ipaddress.IPv6Address
+    assert addr.is_link_local, 'Provided address is not link-local'
+    addr_int = int(addr.exploded.replace(':', ''), 16)
+    mac_int = addr_int ^ XOR_MASK
+    mac_int = ((mac_int & LL_OUI_MASK) >> OUI_SHIFT) | (mac_int & LL_NIC_MASK)
+    mac_bytes = bytes.fromhex(f'{mac_int:012x}')
+    mac_str = hexlify(mac_bytes, sep=':').decode()
+    return mac_str
+
+
+def m2l(mac_str: str) -> str:
+    mac_int = int(mac_str.replace(':', ''), 16)
+    addr_int = ((mac_int & MAC_OUI_MASK) << OUI_SHIFT) | (mac_int & MAC_NIC_MASK)
+    addr_int ^= XOR_MASK
+    addr_bytes = bytes.fromhex(f'{addr_int:032x}')
+    addr_str = hexlify(addr_bytes, sep=':', bytes_per_sep=2).decode()
+    addr = ipaddress.ip_address(addr_str)  # type: ipaddress.IPv6Address
+    return addr.compressed
+
+
+if __name__ == '__main__':
+    if MAC_REGEX.match(sys.argv[1]):
+        print(m2l(sys.argv[1]))
+    else:
+        print(l2m(sys.argv[1]))

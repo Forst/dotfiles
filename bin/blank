@@ -1,0 +1,3 @@
+#!/bin/sh
+
+busctl --user call org.gnome.Shell /org/gnome/ScreenSaver org.gnome.ScreenSaver SetActive b true

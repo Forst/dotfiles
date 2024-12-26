@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# $1 - ref
+# $2 - colour
+print_ref() {
+	git for-each-ref \
+		--color=always \
+		--sort=-creatordate \
+		--format="%(HEAD)%09%(color:${2})%(refname:short)%(color:reset)%09%(if)%(upstream:track)%(then)%(color:red)%(upstream:track)%(color:reset) %(end)%(subject)%09%(color:green)%(creatordate:short)%(color:reset)%09%(taggername)%(authorname)" \
+		"${1}"
+}
+
+main() {
+	printf "\t\e[1m━━━ Local branches ━━━\e[0m\n"
+	print_ref refs/heads/ yellow
+
+	if [ "${print_tags:-}" = "1" ]; then
+		printf "\t\e[1m━━━ Tags ━━━\e[0m\n"
+		print_ref refs/tags/ brightcyan
+	fi
+
+	if [ "${print_remote:-}" = "1" ]; then
+		printf "\t\e[1m━━━ Remote branches ━━━\e[0m\n"
+		print_ref refs/remotes/origin/ brightmagenta
+	fi
+}
+
+while getopts 'tr' opt; do
+	case "${opt}" in
+		t)
+			print_tags=1
+			;;
+		r)
+			print_remote=1
+			;;
+		'?')
+			exit 1
+			;;
+	esac
+done
+
+term_width="$(tput cols)"
+main "$@" | column -c "${term_width}" -t -s $'\t' -T 3 | sed 's|\xef\xbf\xbd|\x1b|g'

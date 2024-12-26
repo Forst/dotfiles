@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -euo pipefail
+
+for file in "$@"; do
+	image_index="$(dumpimage -T flat_dt -l "${file}" | grep -E 'Image.*(rootfs|squashfs)' | grep -Po '(?<=Image )\d+')"
+	dumpimage -T flat_dt -p "${image_index}" -o "${file%.*}.sqfs" "${file}"
+done

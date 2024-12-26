@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -euo pipefail
+
+if [ -n "$(nmcli -g GENERAL.STATE c show id "${1}")" ]; then
+	nmcli connection down "${1}"
+else
+	nmcli connection up "${1}"
+fi
