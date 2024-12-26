@@ -96,6 +96,7 @@
     ~/.p10k.zsh: configs/p10k.zsh
     ~/.pam_environment: configs/pam_environment
     ~/.profile: configs/zprofile
+    ~/.ssh/config: configs/ssh
     ~/.tmux.conf: configs/tmux.conf
     ~/.zprofile: configs/zprofile
     ~/.zshcomp: completions
