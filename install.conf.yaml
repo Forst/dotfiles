@@ -7,6 +7,8 @@
       quiet: true
       stdout: true
       stderr: true
+    create:
+      mode: 0750
 
 - clean:
     ~/: {}
@@ -79,6 +81,9 @@
       if [ "$(uname)" = 'Darwin' ] && [ ! -e ~/.iterm2.sh ]; then
         curl -o ~/.iterm2.sh -SL "https://iterm2.com/shell_integration/zsh"
       fi
+
+- create:
+  - ~/.ssh/config.d
 
 - link:
     ~/.config/alacritty/alacritty.toml: configs/alacritty.toml
