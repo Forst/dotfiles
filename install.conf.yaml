@@ -54,6 +54,7 @@
           make -C src
         )
       fi
+
   - description: 'Install rbenv'
     command: |
       if [ ! -e ~/.rbenv ]; then
@@ -63,9 +64,11 @@
           src/configure
           make -C src
         )
-        rbenv_root="$(~/.rbenv/bin/rbenv root)"
-        mkdir -p "${rbenv_root}"/plugins
-        git clone https://github.com/rbenv/ruby-build.git "${rbenv_root}"/plugins/ruby-build
+      fi
+
+      mkdir -p ~/.rbenv/plugins
+      if [ ! -e ~/.rbenv/plugins/ruby-build ]; then
+        git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
       fi
 
   - description: 'Install nvm'
