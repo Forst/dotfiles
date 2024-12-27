@@ -109,7 +109,6 @@
     ~/.gnupg/gpg.conf: configs/gnupg/gpg.conf
     ~/.gnupg/scdaemon.conf: configs/gnupg/scdaemon.conf
     ~/.p10k.zsh: configs/p10k.zsh
-    ~/.pam_environment: configs/pam_environment
     ~/.profile: configs/zprofile
     ~/.ssh/config: configs/ssh
     ~/.tmux.conf: configs/tmux.conf
