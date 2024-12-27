@@ -91,12 +91,6 @@
         git clone https://github.com/tmux-plugins/tmux-sensible ~/.tmux/plugins/tmux-sensible
       fi
 
-  - description: 'Get iTerm2 integration script (macOS)'
-    command: |
-      if [ "$(uname)" = 'Darwin' ] && [ ! -e ~/.iterm2.sh ]; then
-        curl -o ~/.iterm2.sh -SL "https://iterm2.com/shell_integration/zsh"
-      fi
-
 - link:
     ~/.config/alacritty/alacritty.toml: configs/alacritty.toml
     ~/.config/bat/config: configs/bat

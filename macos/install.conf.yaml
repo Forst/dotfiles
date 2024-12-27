@@ -10,6 +10,13 @@
     create:
       mode: 0750
 
+- shell:
+  - description: 'Get iTerm2 integration script (macOS)'
+    command: |
+      if [ ! -e ~/.iterm2.sh ]; then
+        curl -o ~/.iterm2.sh -SL "https://iterm2.com/shell_integration/zsh"
+      fi
+
 - link:
     ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
     ~/.nanorc: configs/nanorc
