@@ -12,3 +12,4 @@
 
 - link:
     ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
+    ~/.nanorc: configs/nanorc
