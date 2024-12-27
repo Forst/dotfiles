@@ -154,8 +154,14 @@ function bin() { python3 -c "print(bin(int('${1}', 16))[2:])"; }
 function hexd() { echo "${1}" | perl -pe 's/([0-9a-f]{2})/chr hex $1/gie'; }
 
 # SSH
-if [ "${SSH_AUTH_SOCK#/tmp/ssh-}" = "${SSH_AUTH_SOCK}" ] && check_com 1password; then
-  export SSH_AUTH_SOCK="${HOME}/.1password/agent.sock"
+# Use 1Password as SSH agent (unless agent is forwarded from SSH client)
+# TODO: maybe check SSH_CONNECTION env var instead?
+if [ "${SSH_AUTH_SOCK#/tmp/ssh-}" = "${SSH_AUTH_SOCK}" ]; then
+  if islinux; then
+    export SSH_AUTH_SOCK="${HOME}/.1password/agent.sock"
+  elif isdarwin; then
+    export SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  fi
 fi
 
 case "${TERM}" in
