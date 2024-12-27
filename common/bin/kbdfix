@@ -1,4 +1,4 @@
-#!/usr/bin/expect
+#!/usr/bin/env expect
 
 # Name this file as kbdfix and make it executable in your path
 eval spawn -noecho $argv
