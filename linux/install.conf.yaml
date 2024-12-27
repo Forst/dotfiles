@@ -15,6 +15,9 @@
     ~/bin: {}
 
 - link:
+    ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
+
+- link:
     ~/bin/:
       glob: true
       path: bin/*
