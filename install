@@ -18,3 +18,14 @@ dotbot_install() {
 }
 
 dotbot_install common
+
+os_type="$(uname)"
+if [ "${os_type}" = 'Linux' ]; then
+        dotbot_install linux
+elif [ "${os_type}" = 'Darwin' ]; then
+        dotbot_install macos
+fi
+
+for profile in "$@"; do
+        dotbot_install "${profile}"
+done
