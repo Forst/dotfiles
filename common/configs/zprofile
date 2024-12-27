@@ -32,4 +32,9 @@ if [ "${PATHS:-}" != "set" ]; then
     export PATH="${HOME}/.rbenv/bin:${PATH}"
     eval "$(rbenv init - | grep 'PATH=')"
   fi
+
+  # Sublime Text (macOS)
+  if [ -e "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ]; then
+    export PATH="${PATH}:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+  fi
 fi
