@@ -15,6 +15,7 @@
     ~/bin: {}
 
 - link:
+    ~/.gitconfig.platform: configs/git/gitconfig.platform
     ~/.gnupg/gpg-agent.conf: configs/gnupg/gpg-agent.conf
     ~/.nanorc: configs/nanorc
     ~/.pam_environment: configs/pam_environment

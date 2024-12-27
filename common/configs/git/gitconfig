@@ -8,7 +8,6 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = "/opt/1Password/op-ssh-sign"
 	allowedSignersFile = ~/.ssh/allowed_signers
 [sendemail]
 	confirm = always
@@ -64,3 +63,7 @@
 [mergetool "smerge"]
 	cmd = smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
 	trustExitCode = true
+
+[include]
+	path = ~/.gitconfig.platform
+	path = ~/.gitconfig.machine-specific
