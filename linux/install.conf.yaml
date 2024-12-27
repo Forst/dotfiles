@@ -1,0 +1,20 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+    shell:
+      quiet: true
+      stdout: true
+      stderr: true
+    create:
+      mode: 0750
+
+- clean:
+    ~/: {}
+    ~/bin: {}
+
+- link:
+    ~/bin/:
+      glob: true
+      path: bin/*
