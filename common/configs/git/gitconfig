@@ -1,14 +1,15 @@
 [core]
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 	autocrlf = false
 	safecrlf = true
 	whitespace = trailing-space,space-before-tab
 	abbrev = 12
+	quotePath = false
 [gpg]
 	format = ssh
 [gpg "ssh"]
 	program = "/opt/1Password/op-ssh-sign"
-	allowedsignersfile = ~/.ssh/allowed_signers
+	allowedSignersFile = ~/.ssh/allowed_signers
 [sendemail]
 	confirm = always
 [color]
@@ -57,6 +58,7 @@
 	conflictStyle = zdiff3
 [mergetool]
 	keepBackup = false
+	prompt = false
 [mergetool "meld"]
 	cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 [mergetool "smerge"]
