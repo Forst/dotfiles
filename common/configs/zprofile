@@ -38,6 +38,11 @@ if [ "${PATHS:-}" != "set" ]; then
     export PATH="${PATH}:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
   fi
 
+  # Sublime Merge (macOS)
+  if [ -e "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ]; then
+    export PATH="${PATH}:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
+  fi
+
   # Java
   if [ -e "${HOME}/Java/jdk" ]; then
     export JAVA_HOME="${HOME}/Java/jdk/Contents/Home"
