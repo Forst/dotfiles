@@ -87,7 +87,7 @@
     # midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     # vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    vpn_ip                # virtual private network indicator
+    # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
     # ram                   # free RAM
@@ -100,8 +100,9 @@
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
     # battery               # internal battery
-    wifi                  # wifi speed
+    # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
+    my_nmcli_vpn
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
