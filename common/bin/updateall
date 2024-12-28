@@ -6,31 +6,29 @@ check_com () {
 	command -v "$1" >/dev/null 2>&1
 }
 
-if [ -d ~/.oh-my-zsh ]; then
-	cd ~/.oh-my-zsh
-	git pull --prune
-	cd ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-	git pull --prune
-	cd ~/.oh-my-zsh/custom/themes/powerlevel10k
-	git pull --prune
-fi
+update_repo() {
+	if [ -d "$1" ]; then
+		(
+			cd "$1"
+			git pull --prune
+		)
+	fi
+}
 
-if [ -d ~/.pyenv ]; then
-	cd ~/.pyenv
-	git pull --prune
-fi
+update_repo ~/.tmux/plugins/tmux-power
+update_repo ~/.tmux/plugins/tmux-sensible
+update_repo ~/.tmux/plugins/tpm
 
-if [ -d ~/.rbenv ]; then
-	cd ~/.rbenv
-	git pull --prune
-	cd ~/.rbenv/plugins/ruby-build
-	git pull --prune
-fi
+update_repo ~/.oh-my-zsh
+update_repo ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+update_repo ~/.oh-my-zsh/custom/themes/powerlevel10k
 
-if [ -d ~/.nvm ]; then
-	cd ~/.nvm
-	git pull --prune
-fi
+update_repo ~/.pyenv
+
+update_repo ~/.rbenv
+update_repo ~/.rbenv/plugins/ruby-build
+
+update_repo ~/.nvm
 
 if check_com brew; then
 	brew update
