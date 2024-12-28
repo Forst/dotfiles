@@ -8,8 +8,24 @@ if [ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]; 
 fi
 
 
-# ----- OH MY ZSH -----
+# ----- BACKPORTS FROM GRML
 
+GRML_OSTYPE=$(uname -s)
+
+islinux () {
+  [ "${GRML_OSTYPE}" = "Linux" ]
+}
+
+isdarwin () {
+  [ "${GRML_OSTYPE}" = "Darwin" ]
+}
+
+check_com () {
+  command -v "$1" >/dev/null 2>&1
+}
+
+
+# ----- OH MY ZSH -----
 # If you come from bash you might have to change your $PATH.
 # export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
@@ -82,23 +98,6 @@ HIST_STAMPS="%Y-%m-%d %H:%M:%S"
 plugins=(encode64 poetry zsh-syntax-highlighting)
 
 source "${ZSH}/oh-my-zsh.sh"
-
-
-# ----- BACKPORTS FROM GRML
-
-GRML_OSTYPE=$(uname -s)
-
-islinux () {
-  [ "${GRML_OSTYPE}" = "Linux" ]
-}
-
-isdarwin () {
-  [ "${GRML_OSTYPE}" = "Darwin" ]
-}
-
-check_com () {
-  command -v "$1" >/dev/null 2>&1
-}
 
 
 # ----- CUSTOM CONFIGURATION
