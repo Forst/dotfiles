@@ -1,0 +1,77 @@
+/* ProtonMail */
+
+/* Spacing around header bar */
+div.content-container header.header {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    height: 3rem !important;
+}
+
+/* "New message" button */
+div.content-container button[data-testid="sidebar:compose"] {
+    padding: 0.1rem 0.2rem 0.2rem 0.1rem !important;
+    background-color: hsl(264, 100%, 61%) !important;
+}
+
+/* "Special offer" button */
+/*div.content-container button[data-testid="cta:special-offer"] {
+    display: none !important;
+}*/
+
+/* Unread indicator (unfocused) */
+span.navigation-counter-item {
+    font-weight: bold !important;
+    color: #fff !important;
+    border: 1px solid hsl(264, 100%, 61%);
+    padding-left: .25rem !important;
+}
+
+/* Sidebar items and group headers/separators */
+div.content-container a.navigation-link,
+div.content-container li.navigation-link-header-group,
+div.content-container button.navigation-link-header-group-link
+{
+    height: auto !important;
+}
+
+/* Sidebar buttons */
+div.content-container button.button-for-icon.button-small,
+div.content-container .navigation-link-header-group-control {
+    padding: 0 0.25rem !important;
+}
+
+/* Toolbar */
+div.content-container nav.toolbar {
+    height: 2rem !important;
+}
+
+/* E-mail list item */
+div.content-container div.item-container--row {
+    padding: 0 8px !important;
+}
+
+/* Search field */
+div.searchbox[role="search"] {
+    margin-top: 6px;
+}
+
+nav[data-shortcut-target="mailbox-toolbar"] {
+    padding-left: 0.5rem !important;
+}
+
+/* Sidebar width */
+div.sidebar[data-focus-root="1"] {
+    width: 12rem !important;
+}
+
+
+/* Yandex Mail */
+
+.with-messages-direct:not(.mail-Page_setup).mail-Page_minified .PSHeader {
+    top: initial !important;
+}
+
+.with-messages-direct:not(.mail-Page_setup).mail-Page_3pane-vertical .mail-App .mail-Layout-Panes.mail-Layout-Panes, .with-messages-direct:not(.mail-Page_setup).mail-Page_3pane-horizontal .mail-App .mail-Layout-Panes.mail-Layout-Panes {
+    top: 47px !important;
+    min-height: 0 !important;
+}
